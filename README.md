@@ -8,7 +8,7 @@
 
 # Eggsthetic
 
-[![](https://img.shields.io/github/license/friedegg/eggsthetic?color=purple&style=flat-square")](./LICENSE) [![](https://img.shields.io/visual-studio-marketplace/d/friedegg.eggsthetic-theme.svg?color=purple)](https://marketplace.visualstudio.com/items?itemName=friedegg.eggsthetic-theme) ![Visual Studio Marketplace Rating (Stars)](https://img.shields.io/visual-studio-marketplace/stars/friedegg.eggsthetic-theme)
+[![](https://img.shields.io/github/license/friedegg/eggsthetic-theme?color=purple&style=flat-square")](./LICENSE) [![](https://img.shields.io/visual-studio-marketplace/d/friedegg.eggsthetic.svg?color=purple)](https://marketplace.visualstudio.com/items?itemName=friedegg.eggsthetic) ![Visual Studio Marketplace Rating (Stars)](https://img.shields.io/visual-studio-marketplace/stars/friedegg.eggsthetic)
 
 A pack of pitch-black color themes for OLED enthusiasts.
 
