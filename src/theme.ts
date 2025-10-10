@@ -34,18 +34,18 @@ export function colors(
         "dropdown.listBackground": theme.primary.background,
 
         "editor.background": theme.primary.background,
-        "editor.findMatchBackground": theme.normal.yellow,
+        "editor.findMatchBackground": c(theme.normal.yellow).alpha(0.75).toHex(),
         "editor.findMatchBorder": c(theme.normal.yellow).darken(0.2).toHex(),
         "editor.findMatchHighlightBackground": c(theme.normal.blue).alpha(0.6).toHex(),
         "editor.foreground": theme.primary.foreground,
         "editor.hoverHighlightBackground": c(theme.normal.white).alpha(0.6).toHex(),
-        "editor.lineHighlightBackground": c(theme.normal.white).alpha(0.6).toHex(),
-        "editor.lineHighlightBorder": c(theme.normal.black).alpha(0.6).toHex(),
+        "editor.lineHighlightBackground": theme.normal.black,
+        "editor.lineHighlightBorder": theme.normal.black,
         "editor.rangeHighlightBackground": c(theme.normal.magenta).alpha(0.6).toHex(),
         "editor.selectionBackground": c(theme.normal.blue).alpha(0.6).toHex(),
         "editor.selectionHighlightBackground": c(theme.normal.blue).alpha(0.6).toHex(),
-        "editor.wordHighlightBackground": c(theme.normal.magenta).alpha(0.6).toHex(),
-        "editor.wordHighlightStrongBackground": c(theme.normal.magenta).alpha(0.25).toHex(),
+        "editor.wordHighlightBackground": c(theme.normal.cyan).alpha(0.75).toHex(),
+        "editor.wordHighlightStrongBackground": c(theme.bright.cyan).alpha(0.7).toHex(),
         "editorBracketMatch.background": c(theme.normal.blue).alpha(0.6).toHex(),
         "editorBracketMatch.border": c(theme.normal.blue).darken(0.2).toHex(),
         "editorCodeLens.foreground": theme.primary.foreground,
@@ -198,9 +198,6 @@ export function tokenColors(
     const red: TokenColor = {
         "name": "Red",
         "scope": [
-            "keyword",
-            "storage",
-            "entity.name.tag",
         ],
         "settings": {
             "foreground": theme.normal.red
@@ -246,11 +243,9 @@ export function tokenColors(
     const magenta: TokenColor = {
         "name": "Magenta",
         "scope": [
-            "invalid.deprecated",
-            "constant.numeric",
-            "constant.language",
-            "constant.character",
-            "constant.other",
+            "keyword",
+            "storage",
+            "entity.name.tag",
         ],
         "settings": {
             "foreground": theme.normal.magenta
@@ -319,7 +314,8 @@ export function tokenColors(
 
     const brightBlue: TokenColor = {
         "name": "Bright Blue",
-        "scope": [],
+        "scope": [
+        ],
         "settings": {
             "foreground": theme.bright.blue
         }
@@ -327,7 +323,12 @@ export function tokenColors(
 
     const brightMagenta: TokenColor = {
         "name": "Bright Magenta",
-        "scope": [],
+        "scope": [
+            "constant.numeric",
+            "constant.language",
+            "constant.character",
+            "constant.other",
+        ],
         "settings": {
             "foreground": theme.bright.magenta
         }
