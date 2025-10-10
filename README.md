@@ -76,7 +76,7 @@ A pack of pitch-black color themes for OLED enthusiasts.
 
 <div align="center">
 
-![Eggsthetic Theme tomorrow night bright](https://raw.githubusercontent.com/friedegg/eggsthetic-theme/main/images/tomorrow.png)
+![Eggsthetic Theme tomorrow night bright](https://raw.githubusercontent.com/friedegg/eggsthetic-theme/main/images/tomorrowNightBright.png)
 
 *tomorrow night bright* [source](https://github.com/ChrisKempson/Tomorrow-Theme)
 
