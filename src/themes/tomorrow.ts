@@ -1,0 +1,29 @@
+import { Theme } from "../typing";
+
+export const tomorrowNightBright: Theme = {
+  bright: {
+    black: "#666666",
+    blue: "#7aa6da",
+    cyan: "#54ced6",
+    green: "#9ec400",
+    magenta: "#b77ee0",
+    red: "#ff3334",
+    white: "#2a2a2a",
+    yellow: "#e7c547",
+  },
+  comment: "https://github.com/chriskempson/tomorrow-theme",
+  normal: {
+    black: "#000000",
+    blue: "#7aa6da",
+    cyan: "#70c0ba",
+    green: "#b9ca4a",
+    magenta: "#c397d8",
+    red: "#d54e53",
+    white: "#424242",
+    yellow: "#e6c547",
+  },
+  primary: {
+    background: "#000000",
+    foreground: "#eaeaea",
+  },
+};

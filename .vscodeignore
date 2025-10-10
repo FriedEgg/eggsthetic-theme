@@ -1,0 +1,10 @@
+.devcontainer/
+.pnpm-store/
+.vscode/
+node_modules/
+src/
+images/
+!images/icon.png
+.gitignore
+eslint.config.js
+pnpm-lock.yaml

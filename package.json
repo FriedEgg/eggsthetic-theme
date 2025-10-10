@@ -1,0 +1,99 @@
+{
+    "name": "eggsthetic",
+    "displayName": "Eggsthetic",
+    "description": "A pack of pitch-black color themes for your OLED'd pleasure.",
+    "version": "0.1.0",
+    "publisher": "friedegg",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/friedegg/eggsthetic.git"
+    },
+    "homepage": "https://github.com/friedegg/eggsthetic#readme",
+    "author": {
+        "name": "friedegg",
+        "url": "https://github.com/friedegg"
+    },
+    "keywords": [
+        "dark",
+        "black",
+        "contrast",
+        "minimal",
+        "pure",
+        "oled"
+    ],
+    "icon": "images/icon.png",
+    "galleryBanner": {
+        "color": "#000000",
+        "theme": "dark"
+    },
+    "engines": {
+        "vscode": "^1.14.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "Eggsthetic Theme: Ayu Dark",
+                "uiTheme": "vs-dark",
+                "path": "./themes/eggsthetic-theme-ayuDark.json"
+            },
+            {
+                "label": "Eggsthetic Theme: Blood Moon",
+                "uiTheme": "vs-dark",
+                "path": "./themes/eggsthetic-theme-bloodMoon.json"
+            },
+            {
+                "label": "Eggsthetic Theme: Campbell",
+                "uiTheme": "vs-dark",
+                "path": "./themes/eggsthetic-theme-campbell.json"
+            },
+            {
+                "label": "Eggsthetic Theme: Chicago95",
+                "uiTheme": "vs-dark",
+                "path": "./themes/eggsthetic-theme-chicago95.json"
+            },
+            {
+                "label": "Eggsthetic Theme: Hyper",
+                "uiTheme": "vs-dark",
+                "path": "./themes/eggsthetic-theme-hyper.json"
+            },
+            {
+                "label": "Eggsthetic Theme: Moonfly",
+                "uiTheme": "vs-dark",
+                "path": "./themes/eggsthetic-theme-moonfly.json"
+            },
+            {
+                "label": "Eggsthetic Theme: Styrokai",
+                "uiTheme": "vs-dark",
+                "path": "./themes/eggsthetic-theme-styrokai.json"
+            },
+            {
+                "label": "Eggsthetic Theme: Tomorrow Night Bright",
+                "uiTheme": "vs-dark",
+                "path": "./themes/eggsthetic-theme-tomorrowNightBright.json"
+            }
+        ]
+    },
+    "type": "module",
+    "scripts": {
+        "build": "vite-node src/index.ts",
+        "build:ext": "vsce package --no-dependencies",
+        "lint": "prettier --write ./src/**/*.ts && eslint --fix"
+    },
+    "dependencies": {
+        "@types/node": "^24.7.0",
+        "@types/vscode": "^1.104.0",
+        "@typescript-eslint/eslint-plugin": "^8.46.0",
+        "@typescript-eslint/parser": "^8.46.0",
+        "@vscode/vsce": "^3.6.2",
+        "colord": "^2.9.3",
+        "eslint": "^9.37.0",
+        "eslint-plugin-perfectionist": "^4.15.1",
+        "ovsx": "^0.10.6",
+        "prettier": "^3.6.2",
+        "typescript": "^5.9.3",
+        "vite-node": "^3.2.4"
+    }
+}
