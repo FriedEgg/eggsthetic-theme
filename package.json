@@ -2,13 +2,13 @@
     "name": "eggsthetic",
     "displayName": "Eggsthetic",
     "description": "A pack of pitch-black color themes for your OLED'd pleasure.",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "publisher": "friedegg",
     "repository": {
         "type": "git",
-        "url": "https://github.com/friedegg/eggsthetic.git"
+        "url": "https://github.com/friedegg/eggsthetic-theme.git"
     },
-    "homepage": "https://github.com/friedegg/eggsthetic#readme",
+    "homepage": "https://github.com/friedegg/eggsthetic-theme#readme",
     "author": {
         "name": "friedegg",
         "url": "https://github.com/friedegg"
