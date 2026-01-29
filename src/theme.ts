@@ -1,25 +1,41 @@
 import { colord as c, extend } from "colord"
+import a11yPlugin from "colord/plugins/a11y";
 import mixPlugin from "colord/plugins/mix";
 
-extend([mixPlugin]);
+extend([mixPlugin, a11yPlugin]);
 
 import { Theme, TokenColor, TokenColors } from "./typing"
 
 export function colors(
     theme: Theme,
 ): Record<string, string> {
+    // Ensure critical UI elements meet WCAG AAA contrast ratios
+    const badgeColors = ensureContrast(theme.normal.blue, theme.primary.foreground, 7);
+    const buttonColors = ensureContrast(theme.primary.foreground, theme.normal.blue, 7);
+    const listFocusColors = ensureContrast(theme.bright.black, theme.bright.white, 4.5);
+    const listHoverColors = ensureContrast(theme.bright.black, theme.bright.white, 4.5);
+    const listHighlightColors = ensureContrast(theme.normal.blue, theme.primary.background, 7);
+    const lineNumberColors = ensureContrast(theme.bright.white, theme.primary.background, 3);
+    const indentGuideActive = ensureContrast(theme.normal.white, theme.primary.background, 3);
+    const indentGuideInactive = ensureContrast(theme.bright.white, theme.primary.background, 3);
+    const dropdownBorderContrast = ensureContrast(
+        c(theme.primary.background).lighten(0.2).toHex(),
+        theme.primary.background,
+        3
+    );
+    
     return {
         "activityBar.background": theme.primary.background,
         "activityBar.foreground": theme.primary.foreground,
         "activityBarBadge.background": theme.primary.background,
         "activityBarBadge.foreground": theme.primary.foreground,
 
-		"badge.background": theme.primary.foreground,
-		"badge.foreground": theme.normal.blue,
+		"badge.background": badgeColors.background,
+		"badge.foreground": badgeColors.foreground,
 
-		"button.background": theme.normal.blue,
-		"button.foreground": theme.primary.foreground,
-		"button.hoverBackground": c(theme.normal.blue).alpha(0.75).toHex(),
+		"button.background": buttonColors.background,
+		"button.foreground": buttonColors.foreground,
+		"button.hoverBackground": c(buttonColors.background).alpha(0.75).toHex(),
 
         "debugExceptionWidget.background": theme.normal.yellow,
         "debugExceptionWidget.border": c(theme.normal.yellow).darken(0.2).toHex(),
@@ -29,7 +45,7 @@ export function colors(
         "descriptionForeground": theme.primary.foreground,
 
         "dropdown.background": theme.primary.background,
-        "dropdown.border": c(theme.primary.background).lighten(0.2).toHex(),
+        "dropdown.border": dropdownBorderContrast.foreground,
         "dropdown.foreground": theme.primary.foreground,
         "dropdown.listBackground": theme.primary.background,
 
@@ -58,10 +74,10 @@ export function colors(
         "editorGutter.modifiedBackground": c(theme.normal.blue).alpha(0.6).toHex(),
         "editorHoverWidget.background": theme.primary.background,
         "editorHoverWidget.border": c(theme.normal.black).lighten(0.2).toHex(),
-        "editorIndentGuide.activeBackground1": theme.normal.white,
-        "editorIndentGuide.background1": theme.bright.white,
-        "editorLineNumber.foreground": theme.bright.white,
-        "editorRuler.foreground": theme.bright.white,
+        "editorIndentGuide.activeBackground1": indentGuideActive.foreground,
+        "editorIndentGuide.background1": indentGuideInactive.foreground,
+        "editorLineNumber.foreground": lineNumberColors.foreground,
+        "editorRuler.foreground": lineNumberColors.foreground,
         "editorWhitespace.foreground": theme.bright.yellow,
         "editorWidget.background": theme.primary.background,
         "editorWidget.border": c(theme.primary.background).lighten(0.2).toHex(),
@@ -87,11 +103,11 @@ export function colors(
         "list.activeSelectionForeground": theme.primary.foreground,
         "list.dropBackground": c(theme.primary.background).lighten(0.25).alpha(0.6).toHex(),
         "list.errorForeground": theme.bright.red,
-        "list.focusBackground": theme.bright.white,
-        "list.focusForeground": theme.bright.black,
-        "list.highlightForeground": theme.normal.blue,
-        "list.hoverBackground": theme.bright.white,
-        "list.hoverForeground": theme.bright.black,
+        "list.focusBackground": listFocusColors.background,
+        "list.focusForeground": listFocusColors.foreground,
+        "list.highlightForeground": listHighlightColors.foreground,
+        "list.hoverBackground": listHoverColors.background,
+        "list.hoverForeground": listHoverColors.foreground,
         "list.inactiveFocusBackground": theme.normal.white,
         "list.inactiveSelectionBackground": c(theme.primary.background).lighten(0.25).toHex(),
         "list.inactiveSelectionForeground": theme.primary.foreground,
@@ -371,4 +387,61 @@ export function tokenColors(
         brightCyan,
         brightWhite
     ]
+}
+
+/**
+ * Ensures two colors meet a minimum contrast ratio by adjusting both toward a middle ground.
+ * Preserves hue while modifying lightness to achieve WCAG compliance.
+ * 
+ * @param foreground - The foreground color (text)
+ * @param background - The background color
+ * @param minRatio - Minimum contrast ratio (7:1 for AAA normal text, 4.5:1 for AA or large text, 3:1 for UI components)
+ * @returns Object with adjusted background and foreground colors as hex strings
+ */
+function ensureContrast(
+    foreground: string,
+    background: string,
+    minRatio: number = 7
+): { background: string; foreground: string } {
+    let fg = c(foreground);
+    let bg = c(background);
+    
+    // Check current contrast
+    let currentRatio = fg.contrast(bg);
+    
+    if (currentRatio >= minRatio) {
+        // Already meets requirement
+        return { background, foreground };
+    }
+    
+    const bgLightness = bg.toHsl().l;
+    
+    let adjustedBg = bg;
+    let adjustedFg = fg;
+    
+    for (let i = 0; i < 50; i++) {
+        currentRatio = adjustedFg.contrast(adjustedBg);
+        
+        if (currentRatio >= minRatio) {
+            break;
+        }
+        
+        if (bgLightness < 20) {
+            adjustedFg = c(adjustedFg).lighten(0.05);
+            if (bgLightness > 0) {
+                adjustedBg = c(adjustedBg).lighten(0.01);
+            }
+        } else if (bgLightness > 50) {
+            adjustedFg = c(adjustedFg).darken(0.05);
+            adjustedBg = c(adjustedBg).lighten(0.01);
+        } else {
+            adjustedFg = c(adjustedFg).lighten(0.03);
+            adjustedBg = c(adjustedBg).darken(0.02);
+        }
+    }
+    
+    return {
+        background: adjustedBg.toHex(),
+        foreground: adjustedFg.toHex()
+    };
 }
